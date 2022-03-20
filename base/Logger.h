@@ -7,14 +7,15 @@
  * @date     2021-10
  * @brief
  *
- * Last Modified:  2021-10-06
+ * Last Modified:  2022-02-22
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
+#pragma once
 
 #include <iostream>
 
-namespace Poker
+namespace Poker::base
 {
     class Logger
     {

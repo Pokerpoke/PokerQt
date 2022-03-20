@@ -17,7 +17,7 @@
 #include <mutex>
 #include <deque>
 #include <condition_variable>
-#include "noncopyable.h"
+#include <base/noncopyable.h>
 
 namespace Poker::base
 {

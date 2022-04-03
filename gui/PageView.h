@@ -11,7 +11,24 @@
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
+
 namespace Poker::gui
 {
+    class PageView
+    {
+    private:
+        /* data */
+    public:
+        PageView(/* args */);
+        ~PageView();
+    };
+
+    PageView::PageView(/* args */)
+    {
+    }
+
+    PageView::~PageView()
+    {
+    }
 
 }

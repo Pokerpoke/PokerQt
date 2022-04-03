@@ -1,17 +1,13 @@
 /**
  *
- * Copyright (c) 2021 Pokerpoke
+ * Copyright (c) 2022 Pokerpoke
  *
  * @file
  * @author   Pokerpoke (pokerpoke@qq.com)
- * @date     2021-10
+ * @date     2022-02
  * @brief
  *
- * Last Modified:  2022-02-22
+ * Last Modified:  2022-02-20
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
-namespace Poker::gui
-{
-
-}

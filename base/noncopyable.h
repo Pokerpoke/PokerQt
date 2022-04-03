@@ -7,10 +7,11 @@
  * @date     2022-03
  * @brief
  *
- * Last Modified:  2022-03-20
+ * Last Modified:  2022-03-26
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
+#pragma once
 
 namespace Poker::base
 {

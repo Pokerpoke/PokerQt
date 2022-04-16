@@ -8,5 +8,5 @@ add_library(${CURRENT_MOD_NAME}
 
 target_link_libraries(
     ${CURRENT_MOD_NAME}
-    Qt5::Core
+    Qt6::Core
 )

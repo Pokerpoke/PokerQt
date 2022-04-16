@@ -8,13 +8,15 @@ find_package(GTest REQUIRED)
 
 add_compile_options(-Wall)
 
+include_directories(${CMAKE_SOURCE_DIR})
+
 ################################################################################
 # qt
 ################################################################################
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-find_package(Qt5 COMPONENTS Core Widgets Gui REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
 ################################################################################
 # add sub directory
 ################################################################################

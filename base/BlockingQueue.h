@@ -7,7 +7,7 @@
  * @date     2022-02
  * @brief
  *
- * Last Modified:  2022-03-20
+ * Last Modified:  2022-06-16
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -18,6 +18,7 @@
 #include <deque>
 #include <condition_variable>
 #include <base/noncopyable.h>
+#include <base/Global.h>
 
 namespace Poker::base
 {

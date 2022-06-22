@@ -7,7 +7,7 @@
  * @date     2022-03
  * @brief
  *
- * Last Modified:  2022-03-20
+ * Last Modified:  2022-06-17
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -27,14 +27,14 @@ int main(int argc, char const *argv[])
             while(1)
             {
                 auto res = q.take();
-                LOG_INFO << res << endl;
+                LOG_INFO << res;
             } });
     worker.detach();
 
     std::thread consumer([&q]
                          { 
                              for(int i = 0; i < 10; i++){
-                                 LOG_DEBUG << i << endl;
+                                 LOG_DEBUG << i;
                                  q.push(i);
                                  std::this_thread::sleep_for(1s);
                               } });

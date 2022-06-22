@@ -14,8 +14,8 @@ foreach(T_FILE_NAME ${EXECUTABLE})
         ${PROJECT_NAME}_gui
         # GTest::GTest
         # GTest::Main
-        Qt5::Core
-        Qt5::Widgets
+        Qt6::Core
+        Qt6::Widgets
     )
     # gtest_discover_tests(${EXECUTABLE_NAME})
 endforeach()

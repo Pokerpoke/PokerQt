@@ -4,28 +4,25 @@
  *
  * @file
  * @author   Pokerpoke (pokerpoke@qq.com)
- * @date     2022-03
+ * @date     2022-06
  * @brief
  *
  * Last Modified:  2022-06-16
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
-
 #pragma once
 
 #include <base/Global.h>
 
 namespace Poker::base
 {
-    class POKER_EXPORT noncopyable
+    class POKER_LIBRARY Timer
     {
-    protected:
-        noncopyable() = default;
-        ~noncopyable() = default;
+    public:
+        Timer() {}
+        ~Timer() {}
 
-    private:
-        noncopyable(const noncopyable &) = delete;
-        noncopyable &operator=(const noncopyable) = delete;
+        static void single_shot(){};
     };
 }

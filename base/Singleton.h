@@ -7,16 +7,18 @@
  * @date     2021-10
  * @brief
  *
- * Last Modified:  2022-06-16
+ * Last Modified:  2022-07-06
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
 #pragma once
 
+#include <base/noncopyable.h>
+
 namespace Poker::base
 {
     template <typename T>
-    class Singleton
+    class Singleton : noncopyable
     {
     public:
         static T &instance()
@@ -25,9 +27,10 @@ namespace Poker::base
             return t;
         }
 
-    private:
-        Singleton() = default;
-        Singleton(const Singleton &) = delete;
-        Singleton &operator=(const Singleton) = delete;
+        // private:
+        //     Singleton() = default;
+        //     ~Singleton() = default;
+        //     Singleton(const Singleton &) = delete;
+        //     Singleton &operator=(const Singleton) = delete;
     };
 }

@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-06-16
+ * Last Modified:  2022-07-04
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -18,10 +18,21 @@ namespace Poker::base
 {
     class Event
     {
-    private:
-        /* data */
     public:
-        Event(/* args */) {}
+        Event() {}
         ~Event() {}
+
+        int id()
+        {
+            return m_id;
+        }
+
+        void set_id(int id)
+        {
+            m_id = id;
+        }
+
+    private:
+        int m_id;
     };
 }

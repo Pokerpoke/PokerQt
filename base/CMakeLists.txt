@@ -11,5 +11,4 @@ add_library(${CURRENT_MOD_NAME} SHARED
 target_link_libraries(
     ${CURRENT_MOD_NAME}
     ${CMAKE_THREAD_LIBS_INIT}
-    Qt6::Core
 )

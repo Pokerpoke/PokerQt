@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-06-16
+ * Last Modified:  2022-07-04
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -17,12 +17,12 @@
 
 namespace Poker::base
 {
-    class POKER_LIBRARY Timer
+    class POKER_EXPORT Timer
     {
     public:
         Timer() {}
         ~Timer() {}
 
-        static void single_shot(){};
+        static void single_shot() {}
     };
 }

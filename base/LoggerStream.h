@@ -7,14 +7,14 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-06-17
+ * Last Modified:  2022-07-04
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
 #pragma once
 
 // #include <QtCore/QByteArray>
-#include <QtCore/QString>
+#include <string>
 
 namespace Poker::base
 {
@@ -27,12 +27,12 @@ namespace Poker::base
         LoggerStream() {}
         ~LoggerStream() {}
 
-        QString &string()
+        std::string &string()
         {
             return m_stream;
         }
 
-        self &operator<<(const QString &in)
+        self &operator<<(const std::string &in)
         {
             m_stream.append(in);
             return *this;
@@ -40,11 +40,11 @@ namespace Poker::base
 
         self &operator<<(int in)
         {
-            m_stream.append(QString::number(in));
+            m_stream.append(std::to_string(in));
             return *this;
         }
 
     private:
-        QString m_stream;
+        std::string m_stream;
     };
 }

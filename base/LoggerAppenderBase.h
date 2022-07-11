@@ -7,18 +7,18 @@
  * @date     2021-10
  * @brief
  *
- * Last Modified:  2022-06-17
+ * Last Modified:  2022-07-04
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
 #pragma once
 
-#include <QtCore/QDateTime>
-#include <QtCore/QString>
+#include <format>
 #include <base/Global.h>
 #include <base/LoggerConfigure.h>
 #include <base/noncopyable.h>
 #include <source_location>
+#include <base/Utility.h>
 
 namespace Poker::base
 {
@@ -29,24 +29,26 @@ namespace Poker::base
 
         virtual ~LoggerAppenderBase() {}
 
-        virtual QString name() = 0;
+        virtual std::string name() = 0;
 
         virtual int start(const LoggerLevel &level, const std::source_location location)
         {
-            // yyyy-MM-dd hh:mm:ss.zzz [INFO ] fil_name:line funtion_name - log str
-            m_str = std::move(QString("%1 [%2] %3:%4 %5 - ")
-                                  .arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz"))
-                                  .arg(LoggerConfigure::logger_level_color(level) +
-                                       LoggerConfigure::logger_level_str(level) +
-                                       LoggerConfigure::logger_color(LoggerColor::Default))
-                                  .arg(location.file_name())
-                                  .arg(location.line())
-                                  .arg(location.function_name()));
+            auto time = get_current_time_and_date();
+
+            auto log_level_str = LoggerConfigure::logger_level_color(level)
+                                     .append(LoggerConfigure::logger_level_str(level))
+                                     .append(LoggerConfigure::logger_color(LoggerColor::Default));
+
+            m_str = std::format("{} [{}] {}:{} {} - ", time,
+                                log_level_str,
+                                location.file_name(),
+                                location.line(),
+                                location.function_name());
 
             return m_str.size();
         }
 
-        virtual int log(const QString &log_str)
+        virtual int log(const std::string &log_str)
         {
             m_str.append(log_str);
             return log_str.size();
@@ -60,6 +62,6 @@ namespace Poker::base
     protected:
         LoggerConfigure m_configure;
 
-        QString m_str;
+        std::string m_str;
     };
 }

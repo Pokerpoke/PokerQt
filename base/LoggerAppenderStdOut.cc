@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-06-16
+ * Last Modified:  2022-07-04
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -16,14 +16,14 @@
 
 using namespace Poker::base;
 
-QString LoggerAppenderStdOut::name()
+std::string LoggerAppenderStdOut::name()
 {
     return "stdout";
 }
 
 int LoggerAppenderStdOut::finish()
 {
-    std::cout << m_str.toStdString() << std::endl;
+    std::cout << m_str << std::endl;
 
     return m_str.size();
 }

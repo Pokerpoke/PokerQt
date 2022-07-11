@@ -7,49 +7,53 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-06-16
+ * Last Modified:  2022-07-06
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
 #pragma once
 
 #include <memory>
-#include <QtCore/QMap>
+#include <map>
 #include <base/Global.h>
 #include <base/LoggerAppenderBase.h>
 #include <base/LoggerAppenderStdOut.h>
-#include <base/LoggerAppenderAsync.h>
 #include <base/Singleton.h>
+#include <list>
 
 namespace Poker::base
 {
     class POKER_EXPORT LoggerAppender
     {
     public:
-        LoggerAppender() {}
-        ~LoggerAppender() {}
-
         void add_appender(std::shared_ptr<LoggerAppenderBase> appender)
         {
-            m_appenders.insert(appender->name(), appender);
+            m_appenders.emplace(appender->name(), appender);
         }
 
-        std::shared_ptr<LoggerAppenderBase> appender(const QString &name)
+        std::shared_ptr<LoggerAppenderBase> appender(const std::string &name)
         {
-            return m_appenders.value(name);
+            return m_appenders.at(name);
         }
 
-        QList<std::shared_ptr<LoggerAppenderBase>> appenders()
+        std::list<std::shared_ptr<LoggerAppenderBase>> appenders()
         {
+            std::list<std::shared_ptr<LoggerAppenderBase>> res;
+
             if (m_appenders.empty())
             {
                 add_appender(std::make_shared<LoggerAppenderStdOut>());
             }
-            return m_appenders.values();
+
+            for (const auto [key, value] : m_appenders)
+            {
+                res.emplace_back(value);
+            }
+            return res;
         }
 
     private:
-        QMap<QString, std::shared_ptr<LoggerAppenderBase>> m_appenders;
+        std::map<std::string, std::shared_ptr<LoggerAppenderBase>> m_appenders;
     };
 
     static auto LoggerAppenderInstance = Singleton<LoggerAppender>::instance;

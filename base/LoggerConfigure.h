@@ -7,7 +7,7 @@
  * @date     2021-10
  * @brief
  *
- * Last Modified:  2022-06-17
+ * Last Modified:  2022-07-06
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -16,8 +16,8 @@
 
 #include <base/Global.h>
 #include <base/Singleton.h>
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <string>
+#include <map>
 
 namespace Poker::base
 {
@@ -45,9 +45,6 @@ namespace Poker::base
     class POKER_EXPORT LoggerConfigure
     {
     public:
-        LoggerConfigure() {}
-        ~LoggerConfigure() {}
-
         bool changed();
 
         void set_colored(bool colored)
@@ -70,19 +67,19 @@ namespace Poker::base
             return m_colored;
         }
 
-        static QString logger_level_str(const LoggerLevel &level);
-        static QString logger_level_color(const LoggerLevel &level);
-        static QString logger_color(const LoggerColor &color);
+        static std::string logger_level_str(const LoggerLevel &level);
+        static std::string logger_level_color(const LoggerLevel &level);
+        static std::string logger_color(const LoggerColor &color);
 
     private:
         bool m_colored;
         LoggerLevel m_level = LoggerLevel::DEBUG;
 
-        static const QMap<LoggerLevel, QString> m_logger_level;
+        static const std::map<LoggerLevel, std::string> m_logger_level;
 
-        static const QMap<LoggerLevel, LoggerColor> m_logger_level_color;
+        static const std::map<LoggerLevel, LoggerColor> m_logger_level_color;
 
-        static const QMap<LoggerColor, QString> m_logger_color;
+        static const std::map<LoggerColor, std::string> m_logger_color;
     };
 
     static auto LoggerConfigureInstance = Singleton<LoggerConfigure>::instance;

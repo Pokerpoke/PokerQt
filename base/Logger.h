@@ -7,7 +7,7 @@
  * @date     2021-10
  * @brief
  *
- * Last Modified:  2022-06-17
+ * Last Modified:  2022-07-06
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -30,8 +30,7 @@ namespace Poker::base
         Logger(const LoggerLevel &level,
                const std::source_location location)
         {
-
-            for (const auto &appender : LoggerAppenderInstance().appenders())
+            for (const auto appender : LoggerAppenderInstance().appenders())
             {
                 appender->start(level, location);
             }
@@ -44,7 +43,7 @@ namespace Poker::base
 
         ~Logger()
         {
-            for (const auto &appender : LoggerAppenderInstance().appenders())
+            for (const auto appender : LoggerAppenderInstance().appenders())
             {
                 appender->log(m_stream.string());
                 appender->finish();

@@ -7,7 +7,7 @@
  * @date     2021-10
  * @brief
  *
- * Last Modified:  2022-06-16
+ * Last Modified:  2022-07-04
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -16,17 +16,18 @@
 #include <base/Global.h>
 #include <base/LoggerAppenderBase.h>
 #include <base/LoggerConfigure.h>
+#include <string>
 
-namespace Poker::base 
+namespace Poker::base
 {
-class POKER_EXPORT LoggerAppenderStdOut : public LoggerAppenderBase 
-{
-public:
-    LoggerAppenderStdOut() { }
-    ~LoggerAppenderStdOut() { }
+    class POKER_EXPORT LoggerAppenderStdOut : public LoggerAppenderBase
+    {
+    public:
+        LoggerAppenderStdOut() {}
+        ~LoggerAppenderStdOut() {}
 
-    QString name();
+        std::string name();
 
-    int finish();
-};
+        int finish();
+    };
 }

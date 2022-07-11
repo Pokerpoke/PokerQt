@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-06-17
+ * Last Modified:  2022-07-04
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -15,7 +15,7 @@
 
 using namespace Poker::base;
 
-const QMap<LoggerLevel, QString> LoggerConfigure::m_logger_level{
+const std::map<LoggerLevel, std::string> LoggerConfigure::m_logger_level{
     {LoggerLevel::FATAL, "FATAL"},
     {LoggerLevel::ERROR, "ERROR"},
     {LoggerLevel::WARN, "WARN "},
@@ -24,7 +24,7 @@ const QMap<LoggerLevel, QString> LoggerConfigure::m_logger_level{
     {LoggerLevel::TRACE, "TRACE"},
 };
 
-const QMap<LoggerLevel, LoggerColor> LoggerConfigure::m_logger_level_color{
+const std::map<LoggerLevel, LoggerColor> LoggerConfigure::m_logger_level_color{
     {LoggerLevel::FATAL, LoggerColor::Red},
     {LoggerLevel::ERROR, LoggerColor::Red},
     {LoggerLevel::WARN, LoggerColor::Yellow},
@@ -33,7 +33,7 @@ const QMap<LoggerLevel, LoggerColor> LoggerConfigure::m_logger_level_color{
     {LoggerLevel::TRACE, LoggerColor::Gray},
 };
 
-const QMap<LoggerColor, QString> LoggerConfigure::m_logger_color{
+const std::map<LoggerColor, std::string> LoggerConfigure::m_logger_color{
     {LoggerColor::Red, "\033[0;31m"},
     {LoggerColor::Yellow, "\033[1;33m"},
     {LoggerColor::Blue, "\033[0;34m"},
@@ -42,17 +42,17 @@ const QMap<LoggerColor, QString> LoggerConfigure::m_logger_color{
     {LoggerColor::Default, "\033[0m"},
 };
 
-QString LoggerConfigure::logger_level_str(const LoggerLevel &level)
+std::string LoggerConfigure::logger_level_str(const LoggerLevel &level)
 {
-    return m_logger_level.value(level);
+    return m_logger_level.at(level);
 }
 
-QString LoggerConfigure::logger_level_color(const LoggerLevel &level)
+std::string LoggerConfigure::logger_level_color(const LoggerLevel &level)
 {
-    return logger_color(m_logger_level_color.value(level));
+    return logger_color(m_logger_level_color.at(level));
 }
 
-QString LoggerConfigure::logger_color(const LoggerColor &color)
+std::string LoggerConfigure::logger_color(const LoggerColor &color)
 {
-    return m_logger_color.value(color);
+    return m_logger_color.at(color);
 }

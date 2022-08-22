@@ -47,7 +47,9 @@ jobs:
 
     steps:
     - name: Install CMake
-      run: choco install cmake
+      run: 
+        - choco install cmake
+        - choco install python
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v3

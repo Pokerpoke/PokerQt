@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-07-06
+ * Last Modified:  2022-08-17
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
     ptr->start(LoggerLevel::DEBUG, std::source_location::current());
     ptr->log("elksje");
     ptr->finish();
-    LoggerAppenderInstance().add_appender(ptr);
+    LoggerAppenderInstance().add_appender(std::make_shared<LoggerAppenderAsync>());
 
     // {
     //     LoggerAppenderStdOut log;

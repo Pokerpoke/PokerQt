@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-07-04
+ * Last Modified:  2022-08-22
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -27,6 +27,21 @@ namespace Poker::base
     public:
         LoggerAppenderAsync();
         ~LoggerAppenderAsync();
+
+        int start(const LoggerLevel &level, const std::source_location location)
+        {
+            auto time = get_current_time_and_date();
+
+            auto log_level_str = LoggerConfigure::logger_level_str(level);
+
+            m_str = std::format("{} [{}] {}:{} {} - ", time,
+                                log_level_str,
+                                location.file_name(),
+                                location.line(),
+                                location.function_name());
+
+            return m_str.size();
+        }
 
         std::string name()
         {

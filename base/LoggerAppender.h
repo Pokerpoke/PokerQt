@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-07-06
+ * Last Modified:  2022-08-22
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -19,6 +19,7 @@
 #include <base/LoggerAppenderBase.h>
 #include <base/LoggerAppenderStdOut.h>
 #include <base/Singleton.h>
+#include <functional>
 #include <list>
 
 namespace Poker::base
@@ -45,7 +46,7 @@ namespace Poker::base
                 add_appender(std::make_shared<LoggerAppenderStdOut>());
             }
 
-            for (const auto [key, value] : m_appenders)
+            for (const auto &[key, value] : m_appenders)
             {
                 res.emplace_back(value);
             }

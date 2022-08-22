@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-07-04
+ * Last Modified:  2022-08-22
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -25,15 +25,18 @@ LoggerAppenderAsync::LoggerAppenderAsync()
                                               {
         while(true)
         {
-        auto str = m_queue.take();
+            auto str = m_queue.take();
 
-        if (m_stream.bad())
-            continue;
+            if (m_stream.bad())
+                continue;
 
-        m_stream << str;
+            m_stream << str;
+            m_stream.flush();
         } });
 
     m_thread->detach();
+
+    m_configure.set_colored(false);
 }
 
 LoggerAppenderAsync::~LoggerAppenderAsync()
@@ -42,6 +45,7 @@ LoggerAppenderAsync::~LoggerAppenderAsync()
 
 int LoggerAppenderAsync::finish()
 {
+    m_str.append("\n");
     m_queue.push(m_str);
     return m_str.size();
 }

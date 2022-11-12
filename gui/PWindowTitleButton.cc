@@ -41,6 +41,8 @@ void PWindowTitleButton::mouseMoveEvent(QMouseEvent *event)
         return;
     if (m_dragging)
     {
+        // if (m_main_widget->isMaximized())
+        //     m_main_widget->showNormal();
         // 获得鼠标移动的距离
         auto distance = event->globalPosition() - m_mouse_start_pos;
         // QPoint distance = event->pos() - mouseStartPoint;
@@ -59,4 +61,9 @@ void PWindowTitleButton::mouseReleaseEvent(QMouseEvent *event)
     {
         m_dragging = false;
     }
+}
+
+void PWindowTitleButton::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    emit this->doubleClicked();
 }

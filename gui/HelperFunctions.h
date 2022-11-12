@@ -17,5 +17,6 @@
 namespace Poker
 {
     QString POKER_EXPORT imgPath(const QString &img_name, const QString &skin = "default");
+
     QString POKER_EXPORT loadCss(const QString &css_name, const QString &skin = "default");
-}
+} // namespace Poker

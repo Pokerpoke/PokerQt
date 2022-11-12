@@ -23,15 +23,6 @@ public:
 signals:
     void titleChanged();
 
-private slots:
-    void on_close_clicked();
-
-    void on_maximum_clicked();
-
-    void on_minimal_clicked();
-
-    void on_pushButton_pressed();
-
 private:
     void init();
 

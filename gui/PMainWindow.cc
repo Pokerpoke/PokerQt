@@ -28,11 +28,6 @@ PMainWindow::~PMainWindow()
     delete ui;
 }
 
-void PMainWindow::on_close_clicked()
-{
-    this->close();
-}
-
 void PMainWindow::init()
 {
     // auto t = new PTitleBar(this);
@@ -45,31 +40,6 @@ void PMainWindow::init()
     // ui->maximum->setIcon(QIcon(imgPath("maximum.svg")));
 
     // ui->window_title->setMainWidget(this);
-}
-
-void PMainWindow::on_maximum_clicked()
-{
-    if (this->isMaximized())
-    {
-        this->showNormal();
-        // ui->maximum->setIcon(QIcon(imgPath("maximum.svg")));
-    }
-    else
-    {
-        this->showMaximized();
-        // ui->maximum->setIcon(QIcon(imgPath("normal.svg")));
-    }
-}
-
-void PMainWindow::on_minimal_clicked()
-{
-    this->showMinimized();
-}
-
-void PMainWindow::on_pushButton_pressed()
-{
-    auto cursor_pos = QCursor::pos();
-    LOG_TRACE << cursor_pos.rx();
 }
 
 const QString &PMainWindow::title() const

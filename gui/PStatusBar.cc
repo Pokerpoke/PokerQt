@@ -12,3 +12,7 @@ PStatusBar::~PStatusBar()
 {
     delete ui;
 }
+
+void PStatusBar::showMessage(const QString &msg, int duration)
+{
+}

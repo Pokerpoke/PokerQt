@@ -7,12 +7,13 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-08-17
+ * Last Modified:  2022-11-05
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
 #include <base/Logger.h>
 #include <base/LoggerAppenderAsync.h>
+#include <base/LoggerAppenderSTDOUT.h>
 
 using namespace Poker::base;
 
@@ -25,6 +26,7 @@ int main(int argc, char const *argv[])
     ptr->log("elksje");
     ptr->finish();
     LoggerAppenderInstance().add_appender(std::make_shared<LoggerAppenderAsync>());
+    LoggerAppenderInstance().add_appender(std::make_shared<LoggerAppenderStdOut>());
 
     // {
     //     LoggerAppenderStdOut log;

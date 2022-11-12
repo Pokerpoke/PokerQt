@@ -1,0 +1,7 @@
+PMainWindow {
+    background-color: grey;
+}
+
+QWidget#title_bar {
+    background-color: darkgray;
+}

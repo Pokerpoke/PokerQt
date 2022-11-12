@@ -1,12 +1,24 @@
 set(CURRENT_MOD_NAME ${PROJECT_NAME}_gui)
 
-file(GLOB CURRENT_MOD_SRCS *.cc *.h)
+file(GLOB CURRENT_MOD_SRCS *.cc *.h *.ui)
 
-add_library(${CURRENT_MOD_NAME}
+add_definitions(-DPOKER_LIBRARY)
+
+add_library(${CURRENT_MOD_NAME} SHARED
     ${CURRENT_MOD_SRCS}
     )
 
 target_link_libraries(
     ${CURRENT_MOD_NAME}
+    ${PROJECT_NAME}_base
     Qt6::Core
+    Qt6::Widgets
 )
+
+if(BUILD_QT_DESIGNER_PLUGINS)
+    install(TARGETS ${CURRENT_MOD_NAME}
+        LIBRARY DESTINATION ${Qt6_RUNTIME_DIR}
+        RUNTIME DESTINATION ${Qt6_RUNTIME_DIR}
+        ARCHIVE DESTINATION ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
+    )
+endif()

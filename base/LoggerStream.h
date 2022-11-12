@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-07-04
+ * Last Modified:  2022-11-12
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -15,6 +15,7 @@
 
 // #include <QtCore/QByteArray>
 #include <string>
+#include <type_traits>
 
 namespace Poker::base
 {
@@ -26,6 +27,14 @@ namespace Poker::base
 
         LoggerStream() {}
         ~LoggerStream() {}
+
+        template <typename T>
+            requires requires(T t) { t.toStdString(); }
+        self &operator<<(const T &in)
+        {
+            m_stream.append(in.toStdString());
+            return *this;
+        }
 
         std::string &string()
         {

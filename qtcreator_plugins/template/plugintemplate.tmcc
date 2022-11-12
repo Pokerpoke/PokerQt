@@ -1,0 +1,89 @@
+#include "gui/${CLASS_NAME}.h"
+#include "${CLASS_NAME}Plugin.h"
+
+#include <QtPlugin>
+
+${CLASS_NAME}Plugin::${CLASS_NAME}Plugin(QObject *parent) : QObject(parent)
+{
+}
+
+void ${CLASS_NAME}Plugin::initialize(QDesignerFormEditorInterface * /* core */)
+{
+    if (initialized)
+        return;
+
+    initialized = true;
+}
+
+bool ${CLASS_NAME}Plugin::isInitialized() const
+{
+    return initialized;
+}
+
+QWidget *${CLASS_NAME}Plugin::createWidget(QWidget *parent)
+{
+    return new ${CLASS_NAME}(parent);
+}
+
+QString ${CLASS_NAME}Plugin::name() const
+{
+    return QStringLiteral("${CLASS_NAME}");
+}
+
+QString ${CLASS_NAME}Plugin::group() const
+{
+    return QStringLiteral("PokerQt");
+}
+
+QIcon ${CLASS_NAME}Plugin::icon() const
+{
+    return QIcon();
+}
+
+QString ${CLASS_NAME}Plugin::toolTip() const
+{
+    return QString();
+}
+
+QString ${CLASS_NAME}Plugin::whatsThis() const
+{
+    return QString();
+}
+
+bool ${CLASS_NAME}Plugin::isContainer() const
+{
+    return false;
+}
+
+QString ${CLASS_NAME}Plugin::domXml() const
+{
+    return QLatin1String(R"(
+<ui language="c++">
+  <widget class="${CLASS_NAME}" name="${WIDGET_NAME}">
+)"
+                         R"(
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>100</width>
+        <height>100</height>
+      </rect>
+    </property>
+")
+R"(
+    <property name="toolTip">
+      <string>The Poker Qt plugin</string>
+    </property>
+    <property name="whatsThis">
+      <string>The Poker Qt plugin.</string>
+    </property>
+  </widget>
+</ui>
+)");
+}
+
+QString ${CLASS_NAME}Plugin::includeFile() const
+{
+    return QStringLiteral("gui/${CLASS_NAME}.h");
+}

@@ -7,7 +7,7 @@
  * @date     2021-10
  * @brief
  *
- * Last Modified:  2022-07-04
+ * Last Modified:  2022-11-12
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -25,9 +25,13 @@ namespace Poker::base
     class POKER_EXPORT LoggerAppenderBase
     {
     public:
-        LoggerAppenderBase() {}
+        LoggerAppenderBase()
+        {
+        }
 
-        virtual ~LoggerAppenderBase() {}
+        virtual ~LoggerAppenderBase()
+        {
+        }
 
         virtual std::string name() = 0;
 
@@ -39,11 +43,8 @@ namespace Poker::base
                                      .append(LoggerConfigure::logger_level_str(level))
                                      .append(LoggerConfigure::logger_color(LoggerColor::Default));
 
-            m_str = std::format("{} [{}] {}:{} {} - ", time,
-                                log_level_str,
-                                location.file_name(),
-                                location.line(),
-                                location.function_name());
+            m_str = std::format("{} [{}] {}:{} {} - \n    ", time, log_level_str,
+                                location.file_name(), location.line(), location.function_name());
 
             return m_str.size();
         }
@@ -64,4 +65,4 @@ namespace Poker::base
 
         std::string m_str;
     };
-}
+} // namespace Poker::base

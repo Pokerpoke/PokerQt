@@ -57,7 +57,7 @@ jobs:
         host: 'windows'
         target: 'desktop'
         arch: 'win64_msvc2019_64'
-        tools: 'tools_cmake tools_conan'
+        tools: 'tools_cmake tools_conan tools_ninja'
 
     - name: Configure CMake
       run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_PREFIX_PATH=${{github.workspace}}/qt/ -G "Ninja" -B '${{github.workspace}}'/build

@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-08-22
+ * Last Modified:  2022-11-26
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -16,6 +16,7 @@
 #include <memory>
 #include <fstream>
 #include <thread>
+#include <atomic>
 #include <base/LoggerAppenderBase.h>
 #include <base/BlockingQueue.h>
 #include <base/Global.h>
@@ -34,11 +35,8 @@ namespace Poker::base
 
             auto log_level_str = LoggerConfigure::logger_level_str(level);
 
-            m_str = std::format("{} [{}] {}:{} {} - ", time,
-                                log_level_str,
-                                location.file_name(),
-                                location.line(),
-                                location.function_name());
+            m_str = std::format("{} [{}] {}:{} {} - ", time, log_level_str, location.file_name(),
+                                location.line(), location.function_name());
 
             return m_str.size();
         }
@@ -55,5 +53,8 @@ namespace Poker::base
         std::ofstream m_stream;
         std::shared_ptr<std::jthread> m_thread;
         BlockingQueue<std::string> m_queue;
+        std::atomic_bool m_stop = false;
+
+        const std::string m_stop_queue_flag = "LoggerAppenderAsync::Stop_queue";
     };
-}
+} // namespace Poker::base

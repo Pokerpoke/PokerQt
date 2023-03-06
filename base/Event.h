@@ -7,12 +7,14 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-07-04
+ * Last Modified:  2022-11-26
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
 
 #pragma once
+
+#include <any>
 
 namespace Poker::base
 {
@@ -22,17 +24,16 @@ namespace Poker::base
         Event() {}
         ~Event() {}
 
-        int id()
-        {
-            return m_id;
-        }
+        int id();
 
-        void set_id(int id)
-        {
-            m_id = id;
-        }
+        void set_id(int id);
+
+        void setData(const std::any &data);
+
+        std::any data();
 
     private:
-        int m_id;
+        int m_id = 0;
+        std::any m_data;
     };
 }

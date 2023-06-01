@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets Gui)
 
 # ##############################################################################
 # output
@@ -35,7 +35,7 @@ include_directories(
 # ##############################################################################
 # qt designer plugin
 # ##############################################################################
-option(BUILD_QT_DESIGNER_PLUGINS "Build Qt Designer plugins" ON)
+option(BUILD_QT_DESIGNER_PLUGINS "Build Qt Designer plugins" OFF)
 
 if(BUILD_QT_DESIGNER_PLUGINS)
     set(Qt6_ROOT_DIR ${Qt6_DIR}/../../..)
@@ -58,7 +58,9 @@ endif()
 # add sub directory
 # ##############################################################################
 add_subdirectory(base)
-add_subdirectory(gui)
+if(Qt6_FOUND)
+    add_subdirectory(gui)
+endif()
 add_subdirectory(tests)
 
 # ##############################################################################

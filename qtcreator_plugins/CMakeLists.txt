@@ -16,8 +16,7 @@ foreach(T_FILE_NAME ${EXECUTABLE})
         ${PROJECT_NAME}_gui
         # GTest::GTest
         # GTest::Main
-        Qt6::Core
-        Qt6::Widgets
+        ${QT_REQUIRED_LIBRARIES}
     )
     # gtest_discover_tests(${EXECUTABLE_NAME})
 

@@ -11,8 +11,10 @@ foreach(T_FILE_NAME ${EXECUTABLE})
         PRIVATE
         ${CMAKE_THREAD_LIBS_INIT}
         ${PROJECT_NAME}_base
+        ${PROJECT_NAME}_gui
         # GTest::GTest
         # GTest::Main
+        ${QT_REQUIRED_LIBRARIES}
     )
     # gtest_discover_tests(${EXECUTABLE_NAME})
 endforeach()

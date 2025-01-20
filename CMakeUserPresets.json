@@ -1,0 +1,24 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "build\\RelWithDebInfo\\generators\\CMakePresets.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "Windows-RelWithDebInfo",
+            "inherits": "conan-relwithdebinfo",
+            "displayName": "Windows RelWithDebInfo",
+            "description": "This build is only available on Windows",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "generator": "Ninja",
+            "installDir": "${sourceDir}/build/install"
+        }
+    ]
+}

@@ -7,26 +7,23 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-11-05
+ * Last Modified:  2025-01-20
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
-#include <base/Logger.h>
-#include <base/LoggerAppenderAsync.h>
-#include <base/LoggerAppenderSTDOUT.h>
-
-using namespace Poker::base;
+// using namespace Poker::base;
+#include <spdlog/spdlog.h>
 
 int main(int argc, char const *argv[])
 {
     // Logger logger;
-    auto ptr = std::make_shared<LoggerAppenderAsync>();
+    // auto ptr = std::make_shared<LoggerAppenderAsync>();
 
-    ptr->start(LoggerLevel::DEBUG, std::source_location::current());
-    ptr->log("elksje");
-    ptr->finish();
-    LoggerAppenderInstance().add_appender(std::make_shared<LoggerAppenderAsync>());
-    LoggerAppenderInstance().add_appender(std::make_shared<LoggerAppenderStdOut>());
+    // ptr->start(LoggerLevel::DEBUG, std::source_location::current());
+    // ptr->log("elksje");
+    // ptr->finish();
+    // LoggerAppenderInstance().add_appender(std::make_shared<LoggerAppenderAsync>());
+    // LoggerAppenderInstance().add_appender(std::make_shared<LoggerAppenderStdOut>());
 
     // {
     //     LoggerAppenderStdOut log;
@@ -37,12 +34,14 @@ int main(int argc, char const *argv[])
 
     for (int i = 0; i < 100; i++)
     {
-        LOG_TRACE << "trace";
-        LOG_DEBUG << "debug";
-        LOG_INFO << "info";
-        LOG_WARN << "warn";
-        LOG_ERROR << "error";
-        LOG_FATAL << "fatal";
+        // LOG_TRACE << "trace";
+        // LOG_DEBUG << "debug";
+        // LOG_INFO << "info";
+        // LOG_WARN << "warn";
+        // LOG_ERROR << "error";
+        // LOG_FATAL << "fatal";
+
+        spdlog::info("Welcome to spdlog!");
     }
 
     return 0;

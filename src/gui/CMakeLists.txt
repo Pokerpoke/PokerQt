@@ -1,0 +1,30 @@
+set(CURRENT_MOD gui)
+set(CURRENT_MOD_NAME ${PROJECT_NAME}_${CURRENT_MOD})
+
+add_definitions(-DPOKERQT_GUI_LIB)
+
+file(GLOB CURRENT_MOD_SRCS *.cc *.h *.ui
+    ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/${CURRENT_MOD}/*.h
+)
+
+add_library(${CURRENT_MOD_NAME} SHARED
+    ${CURRENT_MOD_SRCS}
+)
+
+target_include_directories(${CURRENT_MOD_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/include/PokerQt/gui
+)
+
+target_link_libraries(
+    ${CURRENT_MOD_NAME}
+    ${PROJECT_NAME}_base
+    ${QT_REQUIRED_LIBRARIES}
+)
+
+if(BUILD_QT_DESIGNER_PLUGINS)
+    install(TARGETS ${CURRENT_MOD_NAME}
+        LIBRARY DESTINATION ${Qt_RUNTIME_DIR}
+        RUNTIME DESTINATION ${Qt_RUNTIME_DIR}
+        ARCHIVE DESTINATION ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
+    )
+endif()

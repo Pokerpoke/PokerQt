@@ -7,20 +7,20 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2022-06-23
+ * Last Modified:  2025-01-20
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
-#include <base/Task.h>
+#include <PokerQt/base/Task.h>
 #include <string>
-#include <base/Logger.h>
+#include <PokerQt/base/Logger.h>
 
 using namespace Poker::base;
 
 int test_task(int i)
 {
     static int j = 0;
-    LOG_DEBUG << "test " << j;
+    spdlog::debug("test {}", j);
     j++;
     i++;
     return i;
@@ -28,7 +28,7 @@ int test_task(int i)
 
 int main(int argc, char const *argv[])
 {
-    LoggerConfigureInstance().set_level(LoggerLevel::TRACE);
+    // LoggerConfigureInstance().set_level(LoggerLevel::TRACE);
 
     Task<int(int)> task(test_task);
 
@@ -37,7 +37,8 @@ int main(int argc, char const *argv[])
                    .then(test_task)
                    .run(1);
 
-    LOG_DEBUG << res;
+    // LOG_DEBUG << res;
+    spdlog::debug("{}", res);
 
     // task.run();
 

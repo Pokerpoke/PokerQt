@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.25)
 
 project(PokerQt)
 
@@ -7,15 +7,33 @@ set(CMAKE_CXX_STANDARD 20)
 # find_package(GTest REQUIRED)
 
 # add_compile_options(-Wall)
+if(QT_INSTALL_DIR)
+    list(PREPEND CMAKE_PREFIX_PATH ${QT_INSTALL_DIR})
 
-# ##############################################################################
-# qt
-# ##############################################################################
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
+    message(STATUS "Use qt install in ${QT_INSTALL_DIR}")
+
+    # ##########################################################################
+    # qt
+    # ##########################################################################
+    set(CMAKE_AUTOMOC ON)
+    set(CMAKE_AUTORCC ON)
+    set(CMAKE_AUTOUIC ON)
+endif(QT_INSTALL_DIR)
 
 option(USE_QT6 "Enable this if you want to use Qt6, instead of Qt5" ON)
+
+set(PROJECT_INSTALL_DIR ${CMAKE_BINARY_DIR}/install)
+
+find_package(fmt REQUIRED)
+find_package(spdlog REQUIRED)
+
+add_definitions(-DSPDLOG_FMT_EXTERNAL)
+
+include_directories(
+    include
+    ${fmt_INCLUDE_DIRS}
+    ${spdlog_INCLUDE_DIRS}
+)
 
 set(USE_QT6 ON)
 
@@ -48,9 +66,9 @@ endif(USE_QT6)
 # ##############################################################################
 # output
 # ##############################################################################
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # ##############################################################################
 # qt designer plugin
@@ -75,17 +93,15 @@ if(BUILD_QT_DESIGNER_PLUGINS)
 endif()
 
 # ##############################################################################
-# add sub directory
-# ##############################################################################
-add_subdirectory(base)
-if(Qt5_FOUND OR Qt6_FOUND)
-    add_subdirectory(gui)
-endif()
-add_subdirectory(tests)
-
-# ##############################################################################
 # install resource files
 # ##############################################################################
+# set(INSTALL_PREFIX ${PROJECT_INSTALL_DIR})
 install(DIRECTORY res
-    DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    DESTINATION ${PROJECT_INSTALL_DIR}
 )
+
+# ##############################################################################
+# add sub directory
+# ##############################################################################
+add_subdirectory(src)
+add_subdirectory(tests)

@@ -7,13 +7,13 @@
  * @date     2022-03
  * @brief
  *
- * Last Modified:  2022-11-26
+ * Last Modified:  2025-01-20
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
 #include <thread>
-#include "base/BlockingQueue.h"
-#include "base/Logger.h"
+#include "PokerQt/base/BlockingQueue.h"
+#include <spdlog/spdlog.h>
 
 using namespace Poker::base;
 using namespace std;
@@ -26,7 +26,12 @@ int main(int argc, char const *argv[])
         while (1)
         {
             auto res = q.take();
-            LOG_INFO << res;
+            spdlog::info(res);
+
+            if (res == 9)
+            {
+                break;
+            }
         }
     });
     worker.detach();
@@ -34,14 +39,12 @@ int main(int argc, char const *argv[])
     std::thread consumer([&q] {
         for (int i = 0; i < 10; i++)
         {
-            LOG_DEBUG << i;
+            spdlog::debug(i);
             q.push(i);
             std::this_thread::sleep_for(1s);
         }
     });
-    consumer.detach();
-
-    getchar();
+    consumer.join();
 
     return 0;
 }

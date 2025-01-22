@@ -1,6 +1,9 @@
 aux_source_directory(. EXECUTABLE)
 
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(
+    ${CMAKE_SOURCE_DIR}
+    ${concurrentqueue_INCLUDE_DIRS}
+)
 
 foreach(T_FILE_NAME ${EXECUTABLE})
     get_filename_component(EXECUTABLE_NAME ${T_FILE_NAME} NAME_WE)
@@ -17,7 +20,7 @@ foreach(T_FILE_NAME ${EXECUTABLE})
     ) # gtest_discover_tests(${EXECUTABLE_NAME})
 
     set_target_properties(${EXECUTABLE_NAME} PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${PROJECT_INSTALL_DIR}"
-        VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_INSTALL_DIR}"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}"
+        VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_INSTALL_PREFIX}"
     )
 endforeach()

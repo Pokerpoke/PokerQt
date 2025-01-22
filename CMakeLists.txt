@@ -22,17 +22,25 @@ endif(QT_INSTALL_DIR)
 
 option(USE_QT6 "Enable this if you want to use Qt6, instead of Qt5" ON)
 
-set(PROJECT_INSTALL_DIR ${CMAKE_BINARY_DIR}/install)
+# set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
+if(NOT ${CMAKE_INSTALL_PREFIX})
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
+endif()
 
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
+find_package(concurrentqueue REQUIRED)
+find_package(concurrentqueue REQUIRED)
+find_package(bshoshany-thread-pool REQUIRED)
 
 add_definitions(-DSPDLOG_FMT_EXTERNAL)
 
 include_directories(
-    include
+    ${CMAKE_SOURCE_DIR}/include/
     ${fmt_INCLUDE_DIRS}
     ${spdlog_INCLUDE_DIRS}
+    ${concurrentqueue_INCLUDE_DIRS}
+    ${bshoshany-thread-pool_INCLUDE_DIRS}
 )
 
 set(USE_QT6 ON)
@@ -51,6 +59,13 @@ if(USE_QT6)
     set(QT_REQUIRED_LIBRARIES Qt6::Core Qt6::Widgets Qt6::Gui)
 
     add_compile_options(/Zc:__cplusplus)
+
+    # get_target_property(QMAKE_EXE Qt6::qmake IMPORTED_LOCATION)
+    # get_filename_component(QT_BIN_DIR"${QMAKE_EXE }" DIRECTORY)
+
+    # find_program(WINDEPLOYQT_ENV_SETUP qtenv2.bat HINTS "${QT_BIN_DIR}")
+    # find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${QT_BIN_DIR}")
+    qt_standard_project_setup()
 else(USE_QT6)
     find_package(Qt5 COMPONENTS Core Widgets Gui)
 
@@ -95,9 +110,9 @@ endif()
 # ##############################################################################
 # install resource files
 # ##############################################################################
-# set(INSTALL_PREFIX ${PROJECT_INSTALL_DIR})
+# set(INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 install(DIRECTORY res
-    DESTINATION ${PROJECT_INSTALL_DIR}
+    DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
 
 # ##############################################################################

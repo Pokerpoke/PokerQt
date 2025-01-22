@@ -7,7 +7,7 @@
  * @date     2022-06
  * @brief
  *
- * Last Modified:  2025-01-20
+ * Last Modified:  2025-01-22
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -16,6 +16,7 @@
 
 #include <memory>
 #include <any>
+#include <functional>
 #include <PokerQt/base/base_global.h>
 
 namespace Poker::base
@@ -24,6 +25,9 @@ class EventPrivate;
 
 class POKERQT_BASE_EXPORT Event
 {
+public:
+    using CallbackType = std::function<void(const std::any &)>;
+
 public:
     Event();
 
@@ -35,9 +39,14 @@ public:
 
     void setData(const std::any &data);
 
+    CallbackType callback();
+
+    void setCallback(CallbackType callback);
+
     std::any data();
 
 private:
     std::shared_ptr<EventPrivate> d;
 };
+
 } // namespace Poker::base

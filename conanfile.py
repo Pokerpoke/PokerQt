@@ -23,16 +23,8 @@ class recipe(ConanFile):
     default_options = {"shared": True, "fPIC": True}
 
     def config_options(self):
-        # self.settings.append("compiler.cppstd")
         if self.settings.os == "Windows":
             del self.options.fPIC
-
-        self.options["qt"].qtsvg = True
-        # self.options["qt"].compiler.cppstd = 17
-
-    # def validate(self):
-    # check_min_cppstd(self, "11")
-    # check_min_cppstd(self, "20")
 
     def requirements(self):
         self.requires(
@@ -43,8 +35,10 @@ class recipe(ConanFile):
             "spdlog/[>=1.15.0]",
             options={"shared": True},
         )
+        self.requires("concurrentqueue/1.0.4")
+        self.requires("bshoshany-thread-pool/5.0.0")
         self.tool_requires("ninja/[>=1.12.1]")
-        self.tool_requires("cmake/[>=3.31.3]")
+        # self.tool_requires("cmake/[>=3.31.3]")
         self.test_requires("gtest/[>=1.15.0]")
 
     def layout(self):
@@ -56,11 +50,6 @@ class recipe(ConanFile):
         tc = CMakeToolchain(self, generator="Ninja")
         tc.cache_variables["CMAKE_EXPORT_COMPILE_COMMANDS"] = "ON"
         tc.generate()
-
-        # dep_pkgs = self.dependencies.host["spdlog"]
-        # dep_pkgs.build_envinfo["SPDLOG_FMT_EXTERNAL"] = "ON"
-
-        # print("dep_pkgs.build_envinfo: {}".format(dep_pkgs.build_envinfo))
 
     def source(self):
         git = Git(self)
@@ -77,17 +66,6 @@ class recipe(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = []
-
-    # def compatibility(self):
-    #     if self.settings.build_type == "RelWithDebInfo":
-    #         return [
-    #             {
-    #                 "settings": [
-    #                     ("build_type", "Release"),
-    #                     ("build_type", "RelWithDebInfo"),
-    #                 ]
-    #             }
-    #         ]
 
     def deploy(self):
         copy(self, "*.dll", src=self.package_folder, dst=self.deploy_folder)

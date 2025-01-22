@@ -7,7 +7,7 @@
  * @date     2022-11
  * @brief
  *
- * Last Modified:  2025-01-20
+ * Last Modified:  2025-01-22
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
@@ -30,6 +30,7 @@ public:
 
     int id;
     std::any data;
+    Event::CallbackType callback;
 };
 } // namespace Poker::base
 
@@ -60,4 +61,14 @@ void Event::setData(const std::any &data)
 std::any Event::data()
 {
     return d->data;
+}
+
+Event::CallbackType Event::callback()
+{
+    return d->callback;
+}
+
+void Event::setCallback(Event::CallbackType callback)
+{
+    d->callback = callback;
 }

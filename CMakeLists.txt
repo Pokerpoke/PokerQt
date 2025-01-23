@@ -4,9 +4,6 @@ project(PokerQt)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# find_package(GTest REQUIRED)
-
-# add_compile_options(-Wall)
 if(QT_INSTALL_DIR)
     list(PREPEND CMAKE_PREFIX_PATH ${QT_INSTALL_DIR})
 
@@ -28,6 +25,7 @@ if(NOT ${CMAKE_INSTALL_PREFIX})
 endif()
 
 find_package(fmt REQUIRED)
+find_package(Boost REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(concurrentqueue REQUIRED)
 find_package(concurrentqueue REQUIRED)
@@ -58,7 +56,10 @@ if(USE_QT6)
 
     set(QT_REQUIRED_LIBRARIES Qt6::Core Qt6::Widgets Qt6::Gui)
 
-    add_compile_options(/Zc:__cplusplus)
+    add_compile_options(
+        /Zc:__cplusplus
+        /Od
+    )
 
     # get_target_property(QMAKE_EXE Qt6::qmake IMPORTED_LOCATION)
     # get_filename_component(QT_BIN_DIR"${QMAKE_EXE }" DIRECTORY)
@@ -119,4 +120,5 @@ install(DIRECTORY res
 # add sub directory
 # ##############################################################################
 add_subdirectory(src)
+add_subdirectory(plugins)
 add_subdirectory(tests)

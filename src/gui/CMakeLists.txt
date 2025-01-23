@@ -1,4 +1,4 @@
-set(CURRENT_MOD gui)
+get_filename_component(CURRENT_MOD ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 set(CURRENT_MOD_NAME ${PROJECT_NAME}_${CURRENT_MOD})
 
 add_definitions(-DPOKERQT_GUI_LIB)

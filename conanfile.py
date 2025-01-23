@@ -35,6 +35,10 @@ class recipe(ConanFile):
             "spdlog/[>=1.15.0]",
             options={"shared": True},
         )
+        self.requires(
+            "boost/1.86.0",
+            options={"shared": True},
+        )
         self.requires("concurrentqueue/1.0.4")
         self.requires("bshoshany-thread-pool/5.0.0")
         self.tool_requires("ninja/[>=1.12.1]")

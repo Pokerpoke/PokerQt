@@ -1,0 +1,2 @@
+add_subdirectory(pokerqt_main)
+add_subdirectory(someip_plugin)

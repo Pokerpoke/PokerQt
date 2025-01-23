@@ -1,8 +1,9 @@
+# set(CURRENT_MOD plugin_manager)
 get_filename_component(CURRENT_MOD ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 set(CURRENT_MOD_NAME ${PROJECT_NAME}_${CURRENT_MOD})
 
 add_definitions(
-    -DPOKERQT_BASE_LIB
+    -DPLUGIN_MANAGER_LIB
     -DUSE_SINGLETON_TEMPLATE
 )
 
@@ -16,12 +17,15 @@ add_library(${CURRENT_MOD_NAME} SHARED
 
 target_include_directories(${CURRENT_MOD_NAME} PUBLIC
     ${fmt_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
 )
 
 target_link_libraries(
-    ${CURRENT_MOD_NAME} PUBLIC
+    ${CURRENT_MOD_NAME}
     ${CMAKE_THREAD_LIBS_INIT}
     fmt::fmt
+    Boost::filesystem
+    ${PROJECT_NAME}_base
 )
 
 install(TARGETS ${CURRENT_MOD_NAME}
@@ -30,12 +34,14 @@ install(TARGETS ${CURRENT_MOD_NAME}
 
     # ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
+
 # if(BUILD_QT_DESIGNER_PLUGINS)
 # install(TARGETS ${CURRENT_MOD_NAME}
 # LIBRARY DESTINATION ${Qt6_RUNTIME_DIR}
 # RUNTIME DESTINATION ${Qt6_RUNTIME_DIR}
 # ARCHIVE DESTINATION ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
 # )
+
 # endif()
 install(CODE [[
     file(GET_RUNTIME_DEPENDENCIES

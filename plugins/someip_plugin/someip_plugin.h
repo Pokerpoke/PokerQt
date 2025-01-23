@@ -13,6 +13,7 @@
  */
 #pragma once
 
+#include <boost/config.hpp>
 #include <PokerQt/plugin_manager/Plugin.h>
 
 class SomeipPlugin : public Poker::plugin::Plugin
@@ -28,3 +29,6 @@ public:
 
     std::pair<int, std::string> command(const std::string &cmd) override;
 };
+
+extern "C" BOOST_SYMBOL_EXPORT SomeipPlugin plugin;
+SomeipPlugin plugin;

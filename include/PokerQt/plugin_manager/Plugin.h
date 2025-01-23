@@ -16,6 +16,7 @@
 #include <PokerQt/plugin_manager/gui_global.h>
 #include <string>
 #include <memory>
+#include <boost/dll/alias.hpp>
 
 namespace Poker::plugin
 {
@@ -28,11 +29,19 @@ public:
     Plugin();
     virtual ~Plugin();
 
-    virtual std::string name() = 0;
+    virtual std::string name();
 
     virtual void init();
     virtual void uninit();
 
     virtual std::pair<int, std::string> command(const std::string &cmd);
+
+    static std::shared_ptr<Plugin> create()
+    {
+        return std::make_shared<Plugin>();
+    }
 };
+
+BOOST_DLL_ALIAS(Poker::plugin::Plugin::create, create_plugin)
+
 } // namespace Poker::plugin

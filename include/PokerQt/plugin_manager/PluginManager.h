@@ -30,7 +30,7 @@ public:
     PluginManager();
     virtual ~PluginManager();
 
-    Plugin::PluginPtr load(const std::string &path, const std::string &name);
+    Plugin::PluginPtr load(const std::string &path);
 
     Plugin::PluginPtr get_plugin(const std::string &name);
 

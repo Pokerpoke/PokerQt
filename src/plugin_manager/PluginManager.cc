@@ -11,8 +11,11 @@
  * Modified By:    Pokerpoke (pokerpoke@qq.com)
  *
  */
+#include "PokerQt/plugin_manager/Plugin.h"
+#include "spdlog/spdlog.h"
 #include <PokerQt/plugin_manager/PluginManager.h>
 #include <boost/dll/import.hpp>
+#include <memory>
 #include <unordered_map>
 #include <PokerQt/base/logger.h>
 
@@ -92,28 +95,41 @@ PluginManager::~PluginManager()
 {
 }
 
-Plugin::PluginPtr PluginManager::load(const std::string &path, const std::string &name)
+Plugin::PluginPtr PluginManager::load(const std::string &path)
 {
     namespace dll = boost::dll;
 
-    auto plugin_temp = dll::import_symbol<Plugin>(path, name, dll::load_mode::append_decorations);
-
-    if (!plugin_temp)
+    try
     {
-        spdlog::error("Load plugin {} failed", name);
+        auto p =
+            dll::import_symbol<Plugin>( // type of imported symbol is located between `<` and `>`
+                path,                   // path to the library and library name
+                "plugin",               // name of the symbol to import
+                dll::load_mode::append_decorations // makes `libmy_plugin_sum.so` or
+                                                   // `my_plugin_sum.dll` from `my_plugin_sum`
+            );
+
+        auto shared_p    = to_std_ptr(p);
+        auto plugin_name = shared_p->name();
+
+        auto it = d->plugins.find(plugin_name);
+        if (it != d->plugins.end())
+        {
+            spdlog::warn("Plugin {} already loaded!", plugin_name);
+            return it->second;
+        }
+
+        d->plugins.insert({shared_p->name(), shared_p});
+
+        spdlog::info("Load plugin {} success!", shared_p->name());
+
+        return shared_p;
+    }
+    catch (const std::exception &e)
+    {
+        spdlog::error("load plugin failed: {}", e.what());
         return nullptr;
     }
-
-    auto plugin = to_std_ptr(plugin_temp);
-
-    d->plugins.insert({plugin->name(), plugin});
-
-    spdlog::trace("Load plugin {}", plugin->name());
-
-    plugin->name();
-    plugin->init();
-
-    return plugin;
 }
 
 Plugin::PluginPtr PluginManager::get_plugin(const std::string &name)

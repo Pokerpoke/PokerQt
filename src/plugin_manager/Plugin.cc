@@ -20,8 +20,14 @@ namespace Poker::plugin
 Plugin::Plugin()
 {
 }
+
 Plugin::~Plugin()
 {
+}
+
+std::string Plugin::name()
+{
+    return "BasePlugin";
 }
 
 void Plugin::init()

@@ -13,6 +13,7 @@
  */
 
 #include "someip_plugin.h"
+#include <PokerQt/base/logger.h>
 
 using namespace Poker::plugin;
 
@@ -39,6 +40,6 @@ void SomeipPlugin::uninit()
 
 std::pair<int, std::string> SomeipPlugin::command(const std::string &cmd)
 {
-
+    spdlog::info("SomeipPlugin command: {}", cmd);
     return {0, "succeed"};
 }

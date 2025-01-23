@@ -33,7 +33,7 @@ class recipe(ConanFile):
         )
         self.requires(
             "spdlog/[>=1.15.0]",
-            options={"shared": True},
+            # options={"shared": True},
         )
         self.requires(
             "boost/1.86.0",
